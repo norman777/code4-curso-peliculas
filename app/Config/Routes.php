@@ -12,6 +12,8 @@ use CodeIgniter\Router\RouteCollection;
 //$routes->get('pelicula/new', 'pelicula::create');
 
 $routes->presenter('pelicula');
+$routes->presenter('categoria');
+
 
 // $routes->get('/', 'Home::index');//listado
 
