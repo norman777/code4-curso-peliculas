@@ -8,8 +8,8 @@
 </head>
 
 <body>
-    <form action="/pelicula/update/<?= $pelicula['id'] ?>" method="post">
-        <?= view('pelicula/_form', ['op' => 'Actualizar'])?>
+    <form action="/dashboard/pelicula/update/<?= $pelicula['id'] ?>" method="post">
+        <?= view('dashboard/pelicula/_form', ['op' => 'Actualizar'])?>
     </form>
 </body>
 

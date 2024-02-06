@@ -11,8 +11,12 @@ use CodeIgniter\Router\RouteCollection;
 //$routes->get('/pelicula', 'pelicula::index');
 //$routes->get('pelicula/new', 'pelicula::create');
 
-$routes->presenter('pelicula');
-$routes->presenter('categoria');
+$routes->group('dashboard', function ($routes) {
+    $routes->presenter('pelicula', ['controller' => 'Dashboard\pelicula']);
+    //$routes->presenter('categoria', ['only' => ['index', 'new', 'create', 'edit', 'update', 'delete', 'show']]);
+    //$routes->presenter('categoria', ['except' => ['index']]);
+    $routes->presenter('categoria', ['except' => ['show'], 'controller' => 'Dashboard\categoria']);
+});
 
 
 // $routes->get('/', 'Home::index');//listado

@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Dashboard;
 
+use App\Controllers\BaseController;
 use App\Models\PeliculaModel;
 
-class pelicula extends BaseController 
+class pelicula extends BaseController
 {
+
     public function show($id)
     {
         // echo $id;
@@ -13,7 +15,7 @@ class pelicula extends BaseController
 
         // var_dump($peliculaModel->find($id));
 
-        echo view('pelicula/show.php',[
+        echo view('dashboard/pelicula/show.php',[
             'pelicula' => ($peliculaModel->find($id))
         ]);
     }
@@ -26,13 +28,14 @@ class pelicula extends BaseController
             'titulo' => $this->request->getPost('titulo'),
             'descripcion' => $this->request->getPost('descripcion'),
         ]);
-        echo 'creado';
+        return redirect()->to('/dashboard/pelicula');
        //// var_dump($this->request->getPost('descripcion'));
     }
 
     public function new()
     {
-        echo view('pelicula/new',[
+        //return redirect()->route('test');
+        echo view('dashboard/pelicula/new',[
             'pelicula' => [
                 'titulo' => '',
                 'descripcion' => ''
@@ -44,7 +47,7 @@ class pelicula extends BaseController
     {
         $peliculaModel = new PeliculaModel();
 
-        echo view('pelicula/edit',[
+        echo view('dashboard/pelicula/edit',[
             'pelicula' => $peliculaModel->find($id)
         ]);
     }
@@ -57,14 +60,16 @@ class pelicula extends BaseController
             'titulo' =>$this->request->getPost('titulo'),
             'descripcion' =>$this->request->getPost('descripcion')
         ]);
-        echo 'update';
+        
+        //return redirect()->back();
+        return redirect()->to('/dashboard/pelicula');
     }
 
     public function delete($id){
         $peliculaModel = new PeliculaModel();
         $peliculaModel->delete($id);
 
-        echo "delete";
+        return redirect()->back();
     }
 
     public function index()
@@ -74,14 +79,14 @@ class pelicula extends BaseController
 
         // ------- var_dump($peliculaModel->findAll()[1]['titulo']);
 
-        /* ------- echo view('index', [
+        /* ------- echo view('dashboard/index', [
             'nombreVariableVista' => 'contenido',
             'nombreVariableVista2' => 'contenido 2',
             'nombreVariableVista3' => 5,
             'miArray' => [1,2,3,4,5],
         ]); ------- */
 
-        echo view('pelicula/index', [
+        echo view('dashboard/pelicula/index', [
             'peliculas' => $peliculaModel->findAll(),
             
         ]);
