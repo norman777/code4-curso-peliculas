@@ -10,6 +10,8 @@
 <body>
     <h1> Listado Peliculas </h1>
 
+    <?= view('partials/_session')?>
+
     <a href="/dashboard/pelicula/new">Crear</a>
     <table>
 

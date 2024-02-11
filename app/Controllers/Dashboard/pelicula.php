@@ -11,31 +11,31 @@ class pelicula extends BaseController
     public function show($id)
     {
         // echo $id;
-        $peliculaModel = new PeliculaModel ();
+        $peliculaModel = new PeliculaModel();
 
         // var_dump($peliculaModel->find($id));
 
-        echo view('dashboard/pelicula/show.php',[
+        echo view('dashboard/pelicula/show.php', [
             'pelicula' => ($peliculaModel->find($id))
         ]);
     }
 
     public function create()
     {
-        $peliculaModel = new PeliculaModel ();
-        
+        $peliculaModel = new PeliculaModel();
+
         $peliculaModel->insert([
             'titulo' => $this->request->getPost('titulo'),
             'descripcion' => $this->request->getPost('descripcion'),
         ]);
-        return redirect()->to('/dashboard/pelicula');
-       //// var_dump($this->request->getPost('descripcion'));
+        return redirect()->to('/dashboard/pelicula')->with('mensaje', 'Registro gestionado de manera exitosa');
+        //// var_dump($this->request->getPost('descripcion'));
     }
 
     public function new()
     {
         //return redirect()->route('test');
-        echo view('dashboard/pelicula/new',[
+        echo view('dashboard/pelicula/new', [
             'pelicula' => [
                 'titulo' => '',
                 'descripcion' => ''
@@ -47,7 +47,7 @@ class pelicula extends BaseController
     {
         $peliculaModel = new PeliculaModel();
 
-        echo view('dashboard/pelicula/edit',[
+        echo view('dashboard/pelicula/edit', [
             'pelicula' => $peliculaModel->find($id)
         ]);
     }
@@ -55,21 +55,22 @@ class pelicula extends BaseController
     public function update($id)
     {
         $peliculaModel = new PeliculaModel();
-        
-        $peliculaModel->update($id,[
-            'titulo' =>$this->request->getPost('titulo'),
-            'descripcion' =>$this->request->getPost('descripcion')
+
+        $peliculaModel->update($id, [
+            'titulo' => $this->request->getPost('titulo'),
+            'descripcion' => $this->request->getPost('descripcion')
         ]);
-        
+
         //return redirect()->back();
-        return redirect()->to('/dashboard/pelicula');
+        return redirect()->to('/dashboard/pelicula')->with('mensaje', 'Registro gestionado de manera exitosa');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $peliculaModel = new PeliculaModel();
         $peliculaModel->delete($id);
 
-        return redirect()->back();
+        return redirect()->back()->with('mensaje', 'Registro gestionado de manera exitosa');
     }
 
     public function index()
@@ -88,8 +89,7 @@ class pelicula extends BaseController
 
         echo view('dashboard/pelicula/index', [
             'peliculas' => $peliculaModel->findAll(),
-            
-        ]);
 
+        ]);
     }
 }
