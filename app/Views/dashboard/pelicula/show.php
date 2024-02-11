@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<?= $this->extend('Layouts/dashboard') ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $pelicula['titulo'] ?></title>
-</head>
+<?= $this->Section('contenido') ?>
 
-<body>
+<h1><?= $pelicula['titulo'] ?></h1>
+<p><?= $pelicula['descripcion'] ?></p>
 
-    <h1><?=$pelicula['titulo'] ?></h1>
-    <p><?=$pelicula['descripcion'] ?></p>
-
-</body>
-
-</html>
+<?= $this->endSection() ?>

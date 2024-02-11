@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
+<?= $this->extend('Layouts/dashboard') ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cacategoria</title>
-</head>
+<?= $this->Section('header') ?>
+    Listado de categorias
+<?= $this->endSection() ?>
 
-<body>
-    <h1>   Listado Categoria </h1> 
+<?= $this->Section('contenido') ?>
 
-
-    <?= view('partials/_session')?>
-
-    <a href="/dashboard/categoria/new">Crear</a>
-    <table>
+<a href="/dashboard/categoria/new">Crear</a>
+<table>
 
     <tr>
         <th>
@@ -28,21 +21,19 @@
         </th>
     </tr>
 
-        <?php foreach ($categorias as $key => $p) : ?>
-            <tr>
-                <td><?= $p ['id']?></td>
-                <td><?= $p ['titulo']?></td>
-                <td>
-                    <a href="/dashboard/categoria/show/<?= $p ['id']?>">Show</a>
-                    <a href="/dashboard/categoria/edit/<?= $p ['id']?>">Edit</a>
-                    <form action="/dashboard/categoria/delete/<?= $p['id'] ?>" method="post">
-                        <button type="submit">Delete</button>
-                    </form>
-                </td>
-            </tr>
-        <?php endforeach ?>
-    </table>
-</body>
+    <?php foreach ($categorias as $key => $p) : ?>
+        <tr>
+            <td><?= $p['id'] ?></td>
+            <td><?= $p['titulo'] ?></td>
+            <td>
+                <a href="/dashboard/categoria/show/<?= $p['id'] ?>">Show</a>
+                <a href="/dashboard/categoria/edit/<?= $p['id'] ?>">Edit</a>
+                <form action="/dashboard/categoria/delete/<?= $p['id'] ?>" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    <?php endforeach ?>
+</table>
 
-</html>
-
+<?= $this->endSection() ?>
