@@ -31,9 +31,18 @@ class categoria extends BaseController
     public function create(){
 
         $categoriaModel = new CategoriaModel();
-        $categoriaModel->insert([
-            'titulo' => $this->request->getPost('titulo')
-        ]);
+
+        if ($this->validate('categorias')) {
+            $categoriaModel->insert([
+                'titulo' => $this->request->getPost('titulo')
+            ]);
+        } else {
+            session()->setFlashdata([
+                'validation' => $this->validator
+            ]);
+
+            return redirect()->back()->withInput();
+        }
         return redirect()->to('/dashboard/categoria')->with('mensaje', 'Registro gestionado de manera exitosa');
     }
 
@@ -45,10 +54,20 @@ class categoria extends BaseController
     }
 
     public function update($id){
+
         $categoriaModel = new CategoriaModel();
-        $categoriaModel->update($id, [
-            'titulo' => $this->request->getPost('titulo')
-        ]);
+
+        if ($this->validate('categorias')) {
+            $categoriaModel->update($id, [
+                'titulo' => $this->request->getPost('titulo')
+            ]);
+        } else {
+            session()->setFlashdata([
+                'validation' => $this->validator
+            ]);
+
+            return redirect()->back()->withInput();
+        }
         //return redirect()->to('/dashboard/categoria');
         return redirect()->back()->with('mensaje', 'Registro gestionado de manera exitosa');
     }
