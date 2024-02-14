@@ -13,7 +13,9 @@ class pelicula extends BaseController
         // echo $id;
         $peliculaModel = new PeliculaModel();
 
-        // var_dump($peliculaModel->find($id));
+        //var_dump($peliculaModel->asArray()->find($id)->id);
+        //var_dump($peliculaModel->asObject()->find($id)->id);
+
 
         echo view('dashboard/pelicula/show.php', [
             'pelicula' => ($peliculaModel->find($id))
@@ -45,10 +47,7 @@ class pelicula extends BaseController
     {
         //return redirect()->route('test');
         echo view('dashboard/pelicula/new', [
-            'pelicula' => [
-                'titulo' => '',
-                'descripcion' => ''
-            ]
+            'pelicula' => new PeliculaModel()
         ]);
     }
 
@@ -90,19 +89,14 @@ class pelicula extends BaseController
         return redirect()->back()->with('mensaje', 'Registro gestionado de manera exitosa');
     }
 
-    public function index()
-    {
+    public function index(){
 
         $peliculaModel = new PeliculaModel();
 
-        // ------- var_dump($peliculaModel->findAll()[1]['titulo']);
+        //$db = \config\Database::connect();
+        //$builder = $db->table('peliculas');
 
-        /* ------- echo view('dashboard/index', [
-            'nombreVariableVista' => 'contenido',
-            'nombreVariableVista2' => 'contenido 2',
-            'nombreVariableVista3' => 5,
-            'miArray' => [1,2,3,4,5],
-        ]); ------- */
+        //return $builder->limit(10, 20)->getCompiledSelect();
 
         echo view('dashboard/pelicula/index', [
             'peliculas' => $peliculaModel->findAll(),
