@@ -7,17 +7,23 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 
-//$routes->get('/', 'Home::index');
+$routes->get('/', 'Home::index');
 //$routes->get('/pelicula', 'pelicula::index');
 //$routes->get('pelicula/new', 'pelicula::create');
+
+$routes->group('api', ['namespace' => 'App\Controllers\Api' ], function ($routes) {
+    $routes->resource('pelicula');
+    $routes->resource('categoria');
+});
 
 $routes->group('dashboard', function ($routes) {
     //test user
     //$routes->get('usuario/crear', '\App\Controllers\Web\Usuario::crear_usuario');
     //$routes->get('usuario/probar/contrasena', '\App\Controllers\Web\Usuario::probar_contrasena');
-    $routes->presenter('pelicula', ['controller' => 'Dashboard\pelicula']);
     //$routes->presenter('categoria', ['only' => ['index', 'new', 'create', 'edit', 'update', 'delete', 'show']]);
     //$routes->presenter('categoria', ['except' => ['index']]);
+
+    $routes->presenter('pelicula', ['controller' => 'Dashboard\pelicula']);
     $routes->presenter('categoria', ['except' => ['show'], 'controller' => 'Dashboard\categoria']);
 });
 
