@@ -3,6 +3,7 @@
 namespace App\Controllers\Dashboard;
 
 use App\Controllers\BaseController;
+
 use App\Models\CategoriaModel;
 
 class categoria extends BaseController
